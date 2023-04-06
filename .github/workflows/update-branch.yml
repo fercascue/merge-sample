@@ -5,17 +5,15 @@ on:
     branches:
       - develop
 jobs:
-  update:
-    runs-on: ubuntu-20.04
-    steps:
-        - name: Checkout 🛎
-          # https://github.com/actions/checkout
-          uses: actions/checkout@v3
-      
-        - name: Update Git branch main
-          run: |
-            git config user.name "Update branch"
-            git config user.email github-actions@github.com
-            git checkout main
-            git merge main --no-edit -m "Merged main branch on $(date +%F)"
+    merge-branch:
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v3
+    
+          - name: Merge feature/xxx -> main
+            uses: devmasx/merge-branch@master
+            with:
+              type: now
+              target_branch: main
+              github_token: ${{ github.token }}
        

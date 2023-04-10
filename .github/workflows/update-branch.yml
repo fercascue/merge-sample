@@ -16,14 +16,3 @@ jobs:
             with:
               fetch-depth: 0   
               token: ${{ secrets.PAT }}
-    
-          - name: Merge to main
-            run: |
-                git config --global user.email "${GITHUB_ACTOR}"
-                git config --global user.name "${GITHUB_ACTOR}@users.noreply.github.com"
-                git config pull.rebase false
-                git pull origin main
-                git add .
-                git commit -m "chore (automated): update blog posts"
-                git push origin main
-       
